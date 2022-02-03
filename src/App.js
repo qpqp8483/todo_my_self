@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from 'react';
+import { createGlobalStyle } from 'styled-components';
+import TodoCreate from './components/TodoCreate';
+import TodoHead from './components/TodoHead';
+import TodoList from './components/TodoList';
+import TodoTemplate from './components/TodoTemplate';
+
+const GlobalStyle = createGlobalStyle`
+  html,body{
+    background: #e9ecef;
+    font-size: 62.5%;
+  }
+`;
 
 function App() {
+
+  const initialTodos = [
+    {
+      id: 1,
+      text: "리액트의 기초 알아보기",
+      checked: true,
+    },
+    {
+      id: 2,
+      text: "컴포넌트 스타일링해 보기",
+      checked: true,
+    },
+    {
+      id: 3,
+      text: "일정 관리 앱 만들어 보기",
+      checked: false,
+    },
+  ];
+
+  const [todos, setTodos] = useState(initialTodos);
+
+  const nextId = useRef(4);
+
+  const onInsert = (text) => {
+    const todo = {
+      id: nextId.current,
+      text,
+      checked: false,
+    };
+    setTodos(todos.concat(todo));
+    nextId.current += 1;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <TodoTemplate>
+        <TodoHead />
+        <TodoList todos={todos} />
+        <TodoCreate onInsert={onInsert} />
+      </TodoTemplate>
+    </>
   );
 }
 
