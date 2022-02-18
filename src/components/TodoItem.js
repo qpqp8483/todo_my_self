@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components'
 import { MdDone, MdDelete } from 'react-icons/md';
 
@@ -21,6 +21,7 @@ const TodoItemBlock = styled.div`
   &:hover {
     ${Remove} {
       display: flex;
+      margin-left: auto;
     }
   }
 `;
@@ -45,31 +46,56 @@ const CheckCircle = styled.span`
 `;
 
 const Text = styled.p`
-  flex: 1;
+  position: relative;
   margin: 0;
   font-size: 1.6rem;
   color: #495057;
+  transition: all ease 0.4s;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -3px;
+    width: 0;
+    height: 1px;
+    background-color: #20c997;
+    transition: all ease 0.4s;
+    opacity: 0;
+  }
   ${({ checked }) =>
     checked &&
     css`
       color: #ced4da;
+      &::after {
+        left: -3px;
+        width: calc(100% + 6px);
+        opacity: 1;
+      }
     `}
 `;
 
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, onToggle, onRemove }) => {
 
-    const {id, text, checked} = todo;
+  const { id, text, checked } = todo;
 
-    return (
-      <TodoItemBlock>
-        <CheckCircle checked={checked}>{checked && <MdDone />}</CheckCircle>
-        <Text checked={checked}>{text}</Text>
-        <Remove>
-          <MdDelete />
-        </Remove>
-      </TodoItemBlock>
-    );
+  const removeDelay = () => {
+    setTimeout(() => {
+      onRemove(id);
+    }, 400);
+  } 
+
+  return (
+    <TodoItemBlock>
+      <CheckCircle checked={checked} onClick={() => onToggle(id)}>
+        {checked && <MdDone />}
+      </CheckCircle>
+      <Text checked={checked}>{text}</Text>
+      <Remove onClick={removeDelay}>
+        <MdDelete />
+      </Remove>
+    </TodoItemBlock>
+  );
 };
 
 

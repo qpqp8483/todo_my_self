@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import TodoCreate from './components/TodoCreate';
 import TodoHead from './components/TodoHead';
@@ -46,12 +46,24 @@ function App() {
     nextId.current += 1;
   }
 
+  const onToggle = id => {
+    setTodos(
+      todos.map(todo => 
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo,  
+      )
+    )
+  }
+
+  const onRemove = id => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  }
+
   return (
     <>
       <GlobalStyle />
       <TodoTemplate>
-        <TodoHead />
-        <TodoList todos={todos} />
+        <TodoHead todos={todos} />
+        <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
         <TodoCreate onInsert={onInsert} />
       </TodoTemplate>
     </>
