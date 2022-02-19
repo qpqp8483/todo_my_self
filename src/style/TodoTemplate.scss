@@ -1,11 +1,10 @@
-.todo-template{
-    width: 512px;
-    height: 600px;
-    position: relative;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 0 8px 0 rgba(0,0,0,0.04);
-    margin: 96px auto 32px;
-    display: flex;
-    flex-direction: column;
+.todo-template {
+  width: 512px;
+  height: calc(100% - 30px);
+  position: relative;
+  background: #fff;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
+  margin: 15px auto 0;
+  display: flex;
+  flex-direction: column;
 }

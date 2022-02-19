@@ -8,37 +8,27 @@ const CircleButton = styled.button`
     justify-content: center;
     position: absolute;
     left: 50%;
-    bottom: 0px;
-    width: 80px;
-    height: 80px;
-    font-size: 6.0rem;
+    bottom: 15px;
+    width: calc(100% - 30px);
+    line-height: 45px;
+    font-size: 1.8rem;
     color: #fff;
-    background: #38d9a9;
+    background: #307672;
+    box-shadow: 0 3px 6px 0 #307672;
     &:hover {
-        background: #63e6be;
-    }
-    &:active {
-        background: #20c997;
+        background: #2a6866;
     }
     border: none;
-    border-radius: 50%;
+    border-radius: 5px;
     outline: none;
-    z-index: 5;
+    z-index: 0;
     cursor: pointer;
-    transform: translate(-50%, 50%);
+    transform: translateX(-50%);
     transition: all ease-in 0.125s;
     ${props =>
         props.open &&
         css`
-            background: #ff6b6b;
-            &:hover{
-                background: #ff8787;
-            }
-            &:active{
-                background: #fa5252;
-            }
-            transform: translate(-50%, 50%) rotate(45deg);
-
+            
         `
     }
 `;
@@ -48,6 +38,7 @@ const InsertFormPositioner = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
+  z-index: 1;
 `;
 
 const InsertForm = styled.form`
@@ -104,7 +95,7 @@ const TodoCreate = ({ onInsert }) => {
           </InsertFormPositioner>
         )}
         <CircleButton onClick={onToggle} open={open}>
-          <MdAdd />
+          Add Todo
         </CircleButton>
       </>
     );

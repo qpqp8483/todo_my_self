@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import TodoCreate from './components/TodoCreate';
 import TodoHead from './components/TodoHead';
@@ -7,8 +7,15 @@ import TodoTemplate from './components/TodoTemplate';
 
 const GlobalStyle = createGlobalStyle`
   html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
     background: #e9ecef;
     font-size: 62.5%;
+  }
+  #root{
+    min-height: 100%;
+    max-height: 100%;
   }
 `;
 

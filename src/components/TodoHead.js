@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import '../style/TodoHead.scss';
 
 const TodoHead = ({ todos }) => {
@@ -18,8 +17,8 @@ const TodoHead = ({ todos }) => {
 
   return (
     <div className="todo-head">
-      <h1>{todayNow}</h1>
-      <div className="day">{datOfWeek}요일</div>
+      <h1>React Todo</h1>
+      <div className="day">{todayNow} {datOfWeek}요일</div>
       <div className="tasks-left">할 일 {todoRemain.length}개 남았다!</div>
     </div>
   );
