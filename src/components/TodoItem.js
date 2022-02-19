@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components'
 import { MdDone, MdDelete } from 'react-icons/md';
 
@@ -17,12 +17,22 @@ const Remove = styled.span`
 const TodoItemBlock = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
+  left: 0;
   padding: 12px 0;
   &:hover {
     ${Remove} {
       display: flex;
       margin-left: auto;
     }
+  }
+  ${({ todoItemState }) =>
+    todoItemState &&
+    css`
+      left: -75px;
+      transition: all ease 0.55s;
+      opacity: 0;
+    `
   }
 `;
 
@@ -79,14 +89,19 @@ const TodoItem = ({ todo, onToggle, onRemove }) => {
 
   const { id, text, checked } = todo;
 
+  //Remove의 상태관리를 위한 초기 설정
+  const [todoItemState, setTodoItemState] = useState(false);
+
+  //Remove를 클릭시 실행
   const removeDelay = () => {
+    setTodoItemState(true);
     setTimeout(() => {
       onRemove(id);
     }, 400);
   } 
 
   return (
-    <TodoItemBlock>
+    <TodoItemBlock todoItemState={ todoItemState }>
       <CheckCircle checked={checked} onClick={() => onToggle(id)}>
         {checked && <MdDone />}
       </CheckCircle>

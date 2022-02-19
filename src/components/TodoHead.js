@@ -14,11 +14,13 @@ const TodoHead = ({ todos }) => {
     const week = ['일', '월', '화', '수', '목', '금', '토'];
     let datOfWeek = week[nowDate.getDay()];
 
+    const todoRemain = todos.filter( todo => todo.checked !== true );
+
   return (
     <div className="todo-head">
       <h1>{todayNow}</h1>
       <div className="day">{datOfWeek}요일</div>
-      <div className="tasks-left">할 일 {todos.length}개 남음</div>
+      <div className="tasks-left">할 일 {todoRemain.length}개 남았다!</div>
     </div>
   );
 };

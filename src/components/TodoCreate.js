@@ -80,9 +80,13 @@ const TodoCreate = ({ onInsert }) => {
     }
 
     const onSubmit = e => {
+      if(value === ''){
+        alert('달성할 리스트를 적어주세요!');
+      }else{
         onInsert(value);
         setValue('');
-        e.preventDefault();
+      }
+      e.preventDefault();
     }
 
     return (
