@@ -1,9 +1,11 @@
 .todo-list {
   position: relative;
   flex: 1;
-  padding: 20px 32px 48px;
+  padding: 20px 32px 85px;
+  height: calc(100% - 175px);
   overflow-y: auto;
   overflow-x: hidden;
+  box-sizing: border-box;
   &::after {
     content: "";
     position: absolute;

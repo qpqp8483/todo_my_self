@@ -14,8 +14,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
   #root{
-    min-height: 100%;
-    max-height: 100%;
+    padding: 15px 0;
+    height: 100%;
+    box-sizing: border-box;
   }
 `;
 
